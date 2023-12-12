@@ -19,6 +19,11 @@ public class Student {
 	// Di default gli enum vengono convertiti in numeri interi, se voglio che essi siano invece Stringhe devo usare @Enumerated
 	private StudentType studentType;
 
+	public Student() {
+		// Se voglio che JPA sia in grado di leggere dati dal DB e crearmi un oggetto
+		// è obbligatorio avere il costruttore vuoto
+	}
+
 	public Student(String name, String surname, StudentType studentType) {
 		this.name = name;
 		this.surname = surname;
@@ -47,5 +52,15 @@ public class Student {
 
 	public void setStudentType(StudentType studentType) {
 		this.studentType = studentType;
+	}
+
+	@Override
+	public String toString() {
+		return "Student{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", surname='" + surname + '\'' +
+				", studentType=" + studentType +
+				'}';
 	}
 }
