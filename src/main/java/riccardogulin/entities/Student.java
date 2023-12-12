@@ -1,21 +1,22 @@
 package riccardogulin.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity // <-- Mi indica che questa classe dovrà essere mappata ad una tabella del db
 @Table(name = "students") // <-- Consente di specificare il nome della tabella (Non è obbligatorio)
 public class Student {
 	@Id // <-- Indica che sarà chiave primaria (obbligatorio)
-	private long id;
+	@GeneratedValue // Si usa se si vuol fare gestire gli id al database
+	// Altrimenti devo inserirli io manualmente ogni volta che inserisco un nuovo Studente
+	private long id; // Se uso un long con @GeneratedValue mi ritroverò ad avere un bigserial come tipo di dato della colonna
 
 	@Column(name = "nome") // <-- Consente di personalizzare il nome della colonna (Non è obbligatorio)
 	private String name;
 	@Column(name = "cognome")
 	private String surname;
 	@Column(name = "tipo")
+	@Enumerated(EnumType.STRING)
+	// Di default gli enum vengono convertiti in numeri interi, se voglio che essi siano invece Stringhe devo usare @Enumerated
 	private StudentType studentType;
 
 	public Student(String name, String surname, StudentType studentType) {
